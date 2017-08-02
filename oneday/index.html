@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="address=no"/>
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="css/iconfont.css"/>
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+    <link type="text/css" rel="stylesheet" href="css/swiper.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+    <div class="top">
+        <i class="iconfont icon-fangdajing"></i>
+        <input type="text" placeholder="在此输入要翻译的文本"/>
+        <i class="iconfont icon-pengyouquan"></i>
+    </div>
+</header>
+<section class="section">
+    <div class="nav">
+        <ul>
+            <li>推荐</li>
+            <li class="on">有声美文</li>
+            <li>动听英乐</li>
+            <li>双语悦读</li>
+            <li>英语</li>
+        </ul>
+    </div>
+    <div class="cont">
+
+    </div>
+</section>
+<footer class="footer">
+    <dl>
+        <dt><i class="iconfont icon-whatsapp cur"></i></dt>
+        <dd class="cur">词典</dd>
+    </dl>
+    <dl>
+        <dt><i class="iconfont icon-whatsapp"></i></dt>
+        <dd>翻译</dd>
+    </dl>
+    <dl>
+        <dt><i class="iconfont icon-fengjing"></i></dt>
+        <dd>金品课</dd>
+    </dl>
+    <dl>
+        <dt><i class="iconfont icon-faxiandingdan"></i></dt>
+        <dd>发现</dd>
+    </dl>
+    <dl>
+        <dt><i class="iconfont icon-gerenxinxi"></i></dt>
+        <dd>我的</dd>
+    </dl>
+</footer>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script>
+    var str = "";
+    $.ajax({
+        url: "json/data.json",
+        success: function (data) {
+            $.each(data, function (key, val) {
+                if(key >0) {
+                    $("span").addClass("bg")
+                }
+                str +=`<dl>
+                <dd>
+                <h1>${val.title}</h1>
+
+                <p>
+                <span class="bg">${val.info}</span>
+                <em>${val.nums}</em>
+                </p>
+                </dd>
+                <dt>
+                <img src="images/${val.url}" alt=""/>
+                        </dt>
+                        </dl>`
+            })
+            $(".cont").html(str)
+        }
+    })
+    $(".footer dl").on("click",function(){
+        $(this).children("dt").find("i").addClass("cur")
+        $(this).siblings().children("dt").find("i").removeClass("cur")
+        $(this).children("dd").addClass("cur")
+        $(this).siblings().children("dd").removeClass("cur")
+    })
+</script>
+</body>
+</html>
